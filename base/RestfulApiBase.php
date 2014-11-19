@@ -63,6 +63,8 @@ abstract class RestfulApiBase
      */
     protected function buildParams( $uri )
     {
+        $_params=array();
+
         if( is_string($uri) )
         {
             $uri = explode("/", $uri);
@@ -72,22 +74,24 @@ abstract class RestfulApiBase
         {
             $this->collection = current($uri);
 
-            $_params=array();
-
             if(count($uri)>0)
             {
+                $i=0;
                 foreach($uri as $k=>$v)
                 {
                     if($k%2==0 or $k==0)
                     {
-                        $_params["collection"][]=$v;
+                        $_params["collection"][$i]=$v;
+                        $_params["resource"][$i]="";
                     }
                     else
                     {
-                        $_params["resource"][]=$v;
+                        $_params["resource"][$i]=$v;
+                        $i++;
                     }
 
                 }
+                $_params = array_combine($_params["collection"],$_params["resource"]);
             }
 
             $this->collectionParams	= $_params;
