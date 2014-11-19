@@ -146,6 +146,13 @@ abstract class RestfulApiBase
         {
             http_response_code(200);
             $response["info"] = (array) $object->{$method}();
+
+            if($response["info"]["for_root"])
+            {
+                $response=array_merge($response,$response["info"]["for_root"]);    
+                unset($response["info"]["for_root"]);
+            }
+
         }
 
         if(isset($_GET["debug"]))
