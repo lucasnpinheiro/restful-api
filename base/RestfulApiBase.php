@@ -141,7 +141,7 @@ abstract class RestfulApiBase
         else
         {
             http_response_code(200);
-            $response = (array) $object->{$method}();
+            $response["info"] = (array) $object->{$method}();
         }
 
         if(isset($_GET["debug"]))
