@@ -14,7 +14,7 @@
  * 
  * @package default
  */
-
+require_once "RestfulApiHelper.php";
 
 abstract class RestfulApiBase
 {
